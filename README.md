@@ -10,14 +10,13 @@
 | first_name_kanji      | string     | null: false |
 | family_name_kana      | string     | null: false |
 | first_name_kana       | string     | null: false |
-| birthday_year_id      | integer    | null: false |
-| birthday_month_id     | integer    | null: false |
-| birthday_day_id       | integer    | null: false |
+| birthday              | date       | null: false |
 
 ### Association
 
 - has_many :items
 - has_many :purchases
+- belongs_to :delivery_address
 
 ## items テーブル
 
@@ -31,31 +30,44 @@
 | sender_region_id       | integer    | null: false |
 | delivery_duration_id   | integer    | null: false |
 | item_price             | integer    | null: false |
-| user_id                | references |             |
+| user                   | references |             |
 
 ### Association
 
 - belongs_to :user
+- belongs_to :delivery_address
 - has_one :purchase
 
 ## purchases テーブル
 
 | Column            | Type       | Options     |
 | ------------------| -----------| ----------- |
-| card_number       | integer    | null: false |
-| card_expiry_month | integer    | null: false |
-| card_expiry_year  | integer    | null: false |
-| security_code     | integer    | null: false |
-| postal_code       | string     | null: false |
-| prefecture        | references | null: false |
-| city_town         | string     | null: false |
-| street_number     | string     | null: false |
-| building_name     | string     |             |
-| phone_number      | integer    | null: false |
-| user_id           | references |             |
-| item_id           | references |             |
+| user              | references |             |
+| item              | references |             |
 
 ### Association
 
 - belongs_to :item
 - belongs_to :user
+- belongs_to :delivery_address
+
+## delivery_addresses テーブル
+
+| Column            | Type       | Options     |
+| ------------------| -----------| ----------- |
+| postal_code       | string     | null: false |
+| prefecture_id     | integer    | null: false |
+| city_town         | string     | null: false |
+| street_number     | string     | null: false |
+| building_name     | string     |             |
+| phone_number      | integer    | null: false |
+| user              | references |             |
+| item              | references |             |
+
+### Association
+
+- has_one :item
+- has_one :user
+- has_one :purchase
+
+
