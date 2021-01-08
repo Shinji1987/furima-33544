@@ -1,20 +1,20 @@
 ## users テーブル
 
-| Column                | Type       | Options                   |
-| ----------------------| -----------| ------------------------- |
-| nickname              | string     | null: false               |
-| email                 | string     | null: false, unique: true |
-| encrypted_password    | string     | null: false               |
-| family_name_kanji     | string     | null: false               |
-| first_name_kanji      | string     | null: false               |
-| family_name_kana      | string     | null: false               |
-| first_name_kana       | string     | null: false               |
-| birthday              | date       | null: false               |
+| Column                | Type       | Options     |
+| ----------------------| -----------| ----------- |
+| nickname              | string     | null: false |
+| email                 | string     | null: false |
+| encrypted_password    | string     | null: false |
+| family_name_kanji     | string     | null: false |
+| first_name_kanji      | string     | null: false |
+| family_name_kana      | string     | null: false |
+| first_name_kana       | string     | null: false |
+| birthday              | date       | null: false |
 
 ### Association
 
 - has_many :items
-- has_many :purchases
+- has_many :orders
 
 ## items テーブル
 
@@ -33,9 +33,9 @@
 ### Association
 
 - belongs_to :user
-- has_one :purchase
+- has_one :order
 
-## purchases テーブル
+## orders テーブル
 
 | Column            | Type       | Options     |
 | ------------------| -----------| ----------- |
@@ -58,10 +58,8 @@
 | street_number     | string     | null: false |
 | building_name     | string     |             |
 | phone_number      | string     | null: false |
-| purchase          | references |             |
+| order             | references |             |
 
 ### Association
 
-- belongs_to :purchase
-
-
+- belongs_to :order
