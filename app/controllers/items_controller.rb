@@ -24,6 +24,12 @@ class ItemsController < ApplicationController
     @user = User.all
   end
 
+  def edit
+  end
+
+  def update
+  end
+
   private
 
   def item_params
