@@ -5,7 +5,6 @@ class ItemsController < ApplicationController
     # @items = Item.all
     # @items = Item.order('created_at DESC')
     @items = Item.order('created_at DESC')
-
   end
 
   def new
