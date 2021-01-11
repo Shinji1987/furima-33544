@@ -126,16 +126,16 @@
     <%= link_to '新規投稿商品', "#", class: "subtitle" %>
     <ul class='item-lists'>
 
-      <% @items.each do |item| %>
-        <div class="content_post" style="background-image: url(<%= item.image %>);">
-          <p><%= item.name %></p>
+      <%# <% @items.each do |item| %>
+        <%# <div class="content_post" style="background-image: url(<%= item.image %>
+          <%# <p><%= item.name %></p>
           <%# <span class="name"> %>
             <%# <%= item.image %>
             <%# <%= image_tag item.image, class: "item-img" %>
-          </span>
-        </div>
+          <%# </span> %>
+        <%# </div> %>
 
-      <% end %>
+      <%# <% end %>
       <%# 商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
       <li class='list'>
         <%= link_to "#" do %>

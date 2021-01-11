@@ -4,8 +4,7 @@ function calculation2 (){
   
   itemPrice.addEventListener('input', function(){
     const price = itemPrice.value
-    value = price * 0.9
-    profit.innerHTML = value
+    profit.innerHTML = Math.floor(price * 0.9)
   })
 }
 
