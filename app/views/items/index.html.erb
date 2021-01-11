@@ -125,15 +125,29 @@
     <h2 class='title'>ピックアップカテゴリー</h2>
     <%= link_to '新規投稿商品', "#", class: "subtitle" %>
     <ul class='item-lists'>
-
+      <li class='list'>
+      <%= link_to root_path do %>
       <% @items.each do |item| %>
         <div class="content_post" style="background-image: url(<%= item.image %>);">
-          <p><%= item.name %></p>
           <%# <span class="name"> %>
             <%# <%= item.image %>
-            <%# <%= image_tag item.image, class: "item-img" %>
-          </span>
+          <%# </span> %>
+          <div class='item-img-content'>
+            <%= image_tag item.image, class: "item-img" if item.image.attached?%>
+          </div>
+          <div class='item-info'>
+            <p><h3 class='item-name'><%= item.name %></h3></p>
+            <div class='item-price'>
+            <span><%= item.price %>円<br>(税込み)</span>
+              <div class='star-btn'>
+                <%= image_tag "star.png", class:"star-icon" %>
+                <span class='star-count'>0</span>
+              </div>
+            </div>
+          </div>
         </div>
+      <% end %>
+      </li>
 
       <% end %>
       <%# 商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
