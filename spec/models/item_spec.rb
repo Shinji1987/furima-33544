@@ -109,6 +109,11 @@ RSpec.describe Item, type: :model do
           @item.valid?
           expect(@item.errors.full_messages).to include('Price is not a number')
         end
+        it '商品の価格は全角文字だと出品できない' do
+          @item.price = 'あいうえお'
+          @item.valid?
+          expect(@item.errors.full_messages).to include('Price is not a number')
+        end
       end
     end
   end
