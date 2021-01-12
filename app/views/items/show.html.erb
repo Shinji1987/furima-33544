@@ -24,17 +24,19 @@
     </div>
 
     <%# ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
-    <% if user_signed_in? && current_user.id == @item.user_id %>
-    <%= link_to '商品の編集', edit_item_path, method: :get, class: "item-red-btn" %>
-    <p class='or-text'>or</p>
-    <%= link_to '削除', "#", method: :delete, class:'item-destroy' %>
-    <% end %>
+    <% if user_signed_in? %>
+       <% if  current_user.id == @item.user_id %>
+        <%= link_to '商品の編集', edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
+        <p class='or-text'>or</p>
+        <%= link_to '削除', "#", method: :delete, class:'item-destroy' %>
 
     <%# 商品が売れていない場合はこちらを表示しましょう %>
-    <% if user_signed_in? && current_user.id != @item.user_id %>
-    <%= link_to '購入画面に進む', "#" ,class:"item-red-btn"%>
-    <% end %>
+       
+       <% elsif current_user.id != @item.user_id %>
+        <%= link_to '購入画面に進む', "#" ,class:"item-red-btn"%>
+       <% end %>
     <%# //商品が売れていない場合はこちらを表示しましょう %>
+    <% end %>
 
 
     <%# //ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
@@ -46,7 +48,7 @@
       <tbody>
         <tr>
           <th class="detail-item">出品者</th>
-          <td class="detail-value"><%= @user.name %></td>
+          <td class="detail-value"><%= @item.user.nickname %></td>
         </tr>
         <tr>
           <th class="detail-item">カテゴリー</th>
@@ -106,7 +108,8 @@
     </a>
   </div>
   <%# 詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
-  <a href=“#” class=‘another-item’><%= "商品のカテゴリー名" %>をもっと見る</a>
+  <%# <a href="item_path"(@item.id) class=‘another-item’><%= @item.category.nameをもっと見る</a> %>
+  <%= link_to "#{@item.category.name}をもっと見る", item_path(@item.id), class:"another-item"%>
   <%# //詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
 </div>
 
