@@ -107,10 +107,7 @@
       後ろの商品 ＞
     </a>
   </div>
-  <%# 詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
-  <%# <a href="item_path"(@item.id) class=‘another-item’><%= @item.category.nameをもっと見る</a> %>
   <%= link_to "#{@item.category.name}をもっと見る", item_path(@item.id), class:"another-item"%>
-  <%# //詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
 </div>
 
 <%= render "shared/footer" %>
