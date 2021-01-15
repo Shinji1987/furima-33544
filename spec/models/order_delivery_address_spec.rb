@@ -9,6 +9,10 @@ RSpec.describe OrderDeliveryAddress, type: :model do
       it '必要な情報を適切に入力すると,商品の購入ができること' do
         expect(@order_delivery_address).to be_valid
       end
+      it '必要な情報を適切に入力して,建物番号は入力されていない場合も商品の購入ができること' do
+        @order_delivery_address.building_name = ''
+        expect(@order_delivery_address).to be_valid
+      end
     end
 
     context '商品の購入ができない場合' do
@@ -60,17 +64,32 @@ RSpec.describe OrderDeliveryAddress, type: :model do
       it '電話番号にハイフンを含めると購入できない' do
         @order_delivery_address.phone_number = '090-222-811'
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include('Phone number is invalid. Exclude hyphen(-) and make it within 11 numbers')
+        expect(@order_delivery_address.errors.full_messages).to include('Phone number is invalid. Exclude hyphen(-), make it within 11 numbers, and put only numbers')
       end
       it '電話番号が11文字より多いと購入できない' do
         @order_delivery_address.phone_number = '090111111111'
         @order_delivery_address.valid?
-        expect(@order_delivery_address.errors.full_messages).to include('Phone number is invalid. Exclude hyphen(-) and make it within 11 numbers')
+        expect(@order_delivery_address.errors.full_messages).to include('Phone number is invalid. Exclude hyphen(-), make it within 11 numbers, and put only numbers')
+      end
+      it '電話番号が英数混合では購入できない' do
+        @order_delivery_address.phone_number = '090111111aaa'
+        @order_delivery_address.valid?
+        expect(@order_delivery_address.errors.full_messages).to include('Phone number is invalid. Exclude hyphen(-), make it within 11 numbers, and put only numbers')
       end
       it 'クレジットカード情報を正しく入力しないと購入できない' do
         @order_delivery_address.token = ''
         @order_delivery_address.valid?
         expect(@order_delivery_address.errors.full_messages).to include("Token can't be blank")
+      end
+      it 'User IDが空だと購入できない' do
+        @order_delivery_address.user_id = nil
+        @order_delivery_address.valid?
+        expect(@order_delivery_address.errors.full_messages).to include("User can't be blank")
+      end
+      it 'Item IDが空だと購入できない' do
+        @order_delivery_address.item_id = nil
+        @order_delivery_address.valid?
+        expect(@order_delivery_address.errors.full_messages).to include("Item can't be blank")
       end
     end
   end

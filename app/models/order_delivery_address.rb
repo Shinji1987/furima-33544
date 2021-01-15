@@ -11,8 +11,10 @@ class OrderDeliveryAddress
     validates :city_town
     validates :street_number
     validates :phone_number,
-              format: { with: /\A\d{11}\z/, message: 'is invalid. Exclude hyphen(-) and make it within 11 numbers' }
+              format: { with: /\A\d{11}\z/, message: 'is invalid. Exclude hyphen(-), make it within 11 numbers, and put only numbers' }
     validates :token
+    validates :user_id
+    validates :item_id
   end
 
   def save

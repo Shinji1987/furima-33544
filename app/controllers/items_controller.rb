@@ -5,7 +5,6 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.order('created_at DESC')
-    # @order_delivery_address = OrderDeliveryAddress.find(params[:item_id])
   end
 
   def new
